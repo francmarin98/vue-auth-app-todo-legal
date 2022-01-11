@@ -14,6 +14,8 @@ import { RouterView } from "vue-router";
   --background-color-secondary: #fff;
   --primary-color: #2c4477;
   --secondary-color: #0069aa;
+  --tertiary-color: #55d3f0;
+  --input-background-color: #e0e0e0;
 }
 
 #app {
@@ -24,6 +26,10 @@ import { RouterView } from "vue-router";
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+a {
+  text-decoration: none;
 }
 
 .radius {
@@ -49,6 +55,23 @@ import { RouterView } from "vue-router";
   background-color: var(--background-color-secondary);
   width: 85%;
   padding: 0 2rem;
+}
+
+.wrapper-header h2.wrapper-title::after {
+  content: "";
+  position: absolute;
+  background-color: var(--primary-color);
+  top: 30%;
+  left: 45%;
+  width: 10% !important;
+  height: 2px;
+}
+
+.wrapper-message {
+  font-size: 1.2rem;
+  margin: 2rem 5rem;
+  text-align: center;
+  color: var(--primary-color);
 }
 
 .wrapper-footer {
@@ -92,6 +115,11 @@ import { RouterView } from "vue-router";
 
   .wrapper-content h3::after {
     width: 35%;
+  }
+
+  .wrapper-message {
+    margin: 4rem 3rem 0 3rem;
+    text-align: center;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <footer>
     <p class="text-footer">
-      Gestor de Procesos by.
+      {{ msg }}
       <span class="link-footer">
         <a href="#">Todo.Legal</a>
       </span>
@@ -12,6 +12,12 @@
 <script>
 export default {
   name: "FooterComponent",
+  props: {
+    msg: {
+      type: String,
+      default: "Gestor de Procesos by",
+    },
+  },
 };
 </script>
 

@@ -26,7 +26,7 @@ export default {
       <h3>Datos verificados:</h3>
       <div class="form-control">
         <label>Nombres y Apellidos</label>
-        <p>Juan Perez Lopez</p>
+        <p>Francisco Marín Calderón</p>
       </div>
       <div class="form-control">
         <label>Cédula de Identidad</label>
