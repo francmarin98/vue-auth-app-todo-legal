@@ -1,10 +1,12 @@
 <script>
 import HeaderComponent from "../components/Header.vue";
 import FooterComponent from "../components/Footer.vue";
+import MainContent from "../components/MainContent.vue";
 
 export default {
   name: "HomeView",
   components: {
+    MainContent,
     FooterComponent,
     HeaderComponent,
   },
@@ -13,33 +15,35 @@ export default {
 
 <template>
   <HeaderComponent />
-  <main class="wrapper radius">
-    <div class="wrapper-header">
-      <img
-        alt="check-icon"
-        class="check-icon"
-        src="../assets/icons/check-icon.svg"
-      />
-      <h2>¡Validación Exitosa!</h2>
-    </div>
-    <div class="wrapper-content radius">
-      <h3>Datos verificados:</h3>
-      <div class="form-control">
-        <label>Nombres y Apellidos</label>
-        <p>Francisco Marín Calderón</p>
+  <main-content>
+    <main class="wrapper radius">
+      <div class="wrapper-header">
+        <img
+          alt="check-icon"
+          class="check-icon"
+          src="../assets/icons/check-icon.svg"
+        />
+        <h2>¡Validación Exitosa!</h2>
       </div>
-      <div class="form-control">
-        <label>Cédula de Identidad</label>
-        <p>1315311009-2</p>
+      <div class="wrapper-content radius">
+        <h3>Datos verificados:</h3>
+        <div class="form-control">
+          <label>Nombres y Apellidos</label>
+          <p>Francisco Marín Calderón</p>
+        </div>
+        <div class="form-control">
+          <label>Cédula de Identidad</label>
+          <p>1315311009-2</p>
+        </div>
       </div>
-    </div>
-    <div class="wrapper-footer">
-      <button class="btn-submit" type="button">
-        Finalizar
-        <i class="far fa-arrow-alt-circle-right"></i>
-      </button>
-    </div>
-  </main>
+      <div class="wrapper-footer">
+        <button class="btn-submit" type="button">
+          Finalizar
+          <i class="far fa-arrow-alt-circle-right"></i>
+        </button>
+      </div>
+    </main>
+  </main-content>
   <FooterComponent />
 </template>
 
@@ -75,11 +79,15 @@ export default {
 
 .form-control label {
   color: var(--primary-color);
+  font-size: 1.4rem;
+}
+
+.form-control p {
   font-size: 1.2rem;
 }
 
 .wrapper-footer {
-  margin-right: 1.5rem;
+  margin-right: 2.5rem;
   justify-self: end;
 }
 

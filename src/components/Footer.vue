@@ -30,12 +30,7 @@ footer {
   height: 3.5rem;
   bottom: 0;
   width: 100%;
-  color: black;
   font-size: 0.9rem;
-}
-
-a {
-  text-decoration: none;
 }
 
 .text-footer {

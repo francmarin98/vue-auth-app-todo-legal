@@ -1,6 +1,6 @@
 <template>
   <header class="page-header">
-    <img alt="logo" class="logo" src="../assets/todo-legal-logo.png" />
+    <img alt="logo" class="logo" src="../assets/images/todo-legal-logo.png" />
   </header>
 </template>
 
