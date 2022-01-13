@@ -1,32 +1,3 @@
-<script>
-import HeaderComponent from "../components/Header.vue";
-import FooterComponent from "../components/Footer.vue";
-import MainContent from "../components/MainContent.vue";
-import { ref } from "vue";
-import useAuthRegister from "../composables/useAuthRegister";
-
-export default {
-  name: "LoginView",
-  components: { MainContent, FooterComponent, HeaderComponent },
-  setup() {
-    const { createUser } = useAuthRegister();
-
-    const registerForm = ref({
-      username: "",
-      password: "",
-      confirm_password: "",
-    });
-
-    return {
-      registerForm,
-      onRegisterSubmit: async () => {
-        await createUser(registerForm.value);
-      },
-    };
-  },
-};
-</script>
-
 <template>
   <HeaderComponent />
   <main-content>
@@ -40,7 +11,7 @@ export default {
       <div class="wrapper-content">
         <form>
           <div class="txt_field">
-            <input v-model="registerForm.username" required type="number" />
+            <input v-model="registerForm.username" required type="text" />
             <span></span>
             <label>Cédula de Identidad</label>
           </div>
@@ -50,7 +21,11 @@ export default {
             <label>Contraseña</label>
           </div>
           <div class="txt_field">
-            <input required type="password" />
+            <input
+              v-model="registerForm.confirm_password"
+              required
+              type="password"
+            />
             <span></span>
             <label>Confirmar Contraseña</label>
           </div>
@@ -63,6 +38,7 @@ export default {
       </div>
       <div class="wrapper-footer">
         <button
+          :disabled="isInvalidRegisterForm"
           class="btn-submit"
           type="button"
           @click.prevent="onRegisterSubmit"
@@ -75,5 +51,58 @@ export default {
   </main-content>
   <FooterComponent msg="Smart Contracts by" />
 </template>
+
+<script>
+import HeaderComponent from "../components/Header.vue";
+import FooterComponent from "../components/Footer.vue";
+import MainContent from "../components/MainContent.vue";
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+import useAuthRegister from "../composables/useAuthRegister";
+import { showAlert } from "../utils";
+
+export default {
+  name: "LoginView",
+  components: { MainContent, FooterComponent, HeaderComponent },
+  setup() {
+    const router = useRouter();
+    const { createUser } = useAuthRegister();
+
+    const registerForm = ref({
+      username: "",
+      password: "",
+      confirm_password: "",
+    });
+
+    const onRegisterSubmit = async () => {
+      const { password, confirm_password } = registerForm.value;
+      if (password !== confirm_password) {
+        await showAlert("Error", "La contraseñas deben ser iguales", "error");
+        return;
+      }
+
+      const { ok, data } = await createUser(registerForm.value);
+      if (ok) {
+        await router.push({ name: "login" });
+      } else {
+        await showAlert("Error de registro", data, "error");
+      }
+    };
+
+    return {
+      registerForm,
+      onRegisterSubmit,
+      isInvalidRegisterForm: computed(() => {
+        const { username, password, confirm_password } = registerForm.value;
+        return !(
+          username.length > 0 &&
+          password.length > 0 &&
+          confirm_password.length > 0
+        );
+      }),
+    };
+  },
+};
+</script>
 
 <style scoped src="../../../assets/css/auth-shared.css"></style>

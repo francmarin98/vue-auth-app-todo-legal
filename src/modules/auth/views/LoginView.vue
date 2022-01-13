@@ -40,7 +40,7 @@
       </div>
       <div class="wrapper-footer">
         <button
-          :disabled="isInvalidForm"
+          :disabled="isInvalidLoginForm"
           class="btn-submit"
           type="button"
           @click.prevent="onLoginSubmit"
@@ -72,8 +72,8 @@ export default {
     const router = useRouter();
 
     const loginForm = ref({
-      username: "1758711124-2",
-      password: "TTes5t20s51**",
+      username: "",
+      password: "",
     });
 
     const onLoginSubmit = async () => {
@@ -94,7 +94,7 @@ export default {
       loginForm,
       onLoginSubmit,
       isHovering,
-      isInvalidForm: computed(() => {
+      isInvalidLoginForm: computed(() => {
         const { username, password } = loginForm.value;
         return !(username.length > 0 && password.length > 0);
       }),
