@@ -57,7 +57,6 @@ import HeaderComponent from "../components/Header.vue";
 import FooterComponent from "../components/Footer.vue";
 import MainContent from "../components/MainContent.vue";
 import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
 import useAuthRegister from "../composables/useAuthRegister";
 import { showAlert } from "../utils";
 
@@ -65,7 +64,6 @@ export default {
   name: "LoginView",
   components: { MainContent, FooterComponent, HeaderComponent },
   setup() {
-    const router = useRouter();
     const { createUser } = useAuthRegister();
 
     const registerForm = ref({
@@ -74,6 +72,12 @@ export default {
       confirm_password: "",
     });
 
+    const resetForm = () => {
+      registerForm.value.username = "";
+      registerForm.value.password = "";
+      registerForm.value.confirm_password = "";
+    };
+
     const onRegisterSubmit = async () => {
       const { password, confirm_password } = registerForm.value;
       if (password !== confirm_password) {
@@ -81,11 +85,12 @@ export default {
         return;
       }
 
-      const { ok, data } = await createUser(registerForm.value);
+      const { ok, msg } = await createUser(registerForm.value);
       if (ok) {
-        await router.push({ name: "login" });
+        resetForm();
+        await showAlert("Éxito", msg);
       } else {
-        await showAlert("Error de registro", data, "error");
+        await showAlert("Error", msg);
       }
     };
 

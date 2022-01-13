@@ -1,11 +1,14 @@
-import { formatUsername } from "../helpers";
 import { showLoading } from "../utils";
 import authAPI from "../api/authAPI";
+import { formatUsername } from "../helpers";
 
 const useAuthRegister = () => {
   const createUser = async (user) => {
     try {
       const { username, password } = user;
+      const access_token = localStorage.getItem("access_token");
+
+      showLoading("Registrando, espere por favor...");
 
       const data = {
         name: "Pedro",
@@ -15,11 +18,16 @@ const useAuthRegister = () => {
         username: formatUsername(username),
         password,
       };
-      showLoading("Registrando, espere por favor...");
-      const response = await authAPI.post("/user", data);
-      return { ok: true, data: response.data };
+
+      await authAPI.post("/user", data, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      return { ok: true, msg: "Registro exitoso" };
     } catch (e) {
-      return { ok: false, data: "Error" };
+      return { ok: false, msg: "Error in user registration" };
     }
   };
 
