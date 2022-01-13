@@ -25,9 +25,12 @@ const useAuthRegister = () => {
         },
       });
 
-      return { ok: true, msg: "Registro exitoso" };
+      return { ok: true, msg: "Registro de usuario exitoso" };
     } catch (e) {
-      return { ok: false, msg: "Error in user registration" };
+      return {
+        ok: false,
+        msg: "La cédula ya esta registrada, intente con una diferente",
+      };
     }
   };
 

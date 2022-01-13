@@ -38,7 +38,7 @@ export default {
         <img
           alt="check-icon"
           class="check-icon"
-          src="../../../assets/icons/check-icon.svg"
+          src="@/assets/icons/check-icon.svg"
         />
         <h2>¡Validación Exitosa!</h2>
       </div>

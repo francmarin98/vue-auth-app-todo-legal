@@ -110,4 +110,4 @@ export default {
 };
 </script>
 
-<style scoped src="../../../assets/css/auth-shared.css"></style>
+<style scoped src="@/assets/css/auth-shared.css"></style>
