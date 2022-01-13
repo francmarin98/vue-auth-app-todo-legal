@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="animate__animated animate__fadeIn">
     <p class="text-footer">
       {{ msg }}
       <span class="link-footer">

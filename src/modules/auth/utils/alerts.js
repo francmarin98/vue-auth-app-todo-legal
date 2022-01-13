@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 export const showLoading = () => {
   new Swal({
-    title: "Autentincando...",
+    title: "Autenticando...",
     allowOutsideClick: false,
   });
   Swal.showLoading();

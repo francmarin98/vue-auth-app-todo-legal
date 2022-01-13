@@ -2,6 +2,10 @@
 import HeaderComponent from "../components/Header.vue";
 import FooterComponent from "../components/Footer.vue";
 import MainContent from "../components/MainContent.vue";
+import { useStore } from "vuex";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthLogout } from "../composables/useAuthLogout";
 
 export default {
   name: "HomeView",
@@ -10,13 +14,26 @@ export default {
     FooterComponent,
     HeaderComponent,
   },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+    const { logout } = useAuthLogout();
+    return {
+      name: computed(() => store.getters["getFullName"]),
+      username: computed(() => store.getters["getUsername"]),
+      onLogout: () => {
+        router.push({ name: "login" });
+        logout();
+      },
+    };
+  },
 };
 </script>
 
 <template>
   <HeaderComponent />
   <main-content>
-    <main class="wrapper radius">
+    <main class="wrapper radius animate__animated animate__fadeIn">
       <div class="wrapper-header">
         <img
           alt="check-icon"
@@ -29,15 +46,15 @@ export default {
         <h3>Datos verificados:</h3>
         <div class="form-control">
           <label>Nombres y Apellidos</label>
-          <p>Francisco Marín Calderón</p>
+          <p>{{ name }}</p>
         </div>
         <div class="form-control">
           <label>Cédula de Identidad</label>
-          <p>1315311009-2</p>
+          <p>{{ username }}</p>
         </div>
       </div>
       <div class="wrapper-footer">
-        <button class="btn-submit" type="button">
+        <button class="btn-submit" type="button" @click="onLogout()">
           Finalizar
           <i class="far fa-arrow-alt-circle-right"></i>
         </button>

@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100&display=swap");
 
+* {
+    font-family: Roboto, serif;
+}
+
 :root {
     --background-color-primary: #fafafa;
     --background-color-secondary: #fff;
@@ -12,7 +16,6 @@
 #app {
     display: flex;
     flex-direction: column;
-    font-family: Roboto, serif;
     height: 90vh;
     justify-content: space-between;
     align-items: center;

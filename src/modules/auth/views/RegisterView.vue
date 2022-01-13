@@ -30,7 +30,7 @@ export default {
 <template>
   <HeaderComponent />
   <main-content>
-    <main class="wrapper radius">
+    <main class="wrapper radius animate__animated animate__fadeIn">
       <div class="wrapper-header">
         <h2 class="wrapper-title">Crear Cuenta Gratis</h2>
         <p class="wrapper-message">

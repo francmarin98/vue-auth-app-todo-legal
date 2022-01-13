@@ -1,5 +1,5 @@
 <template>
-  <header class="page-header">
+  <header class="page-header animate__animated animate__fadeIn">
     <img
       alt="logo"
       class="logo"
