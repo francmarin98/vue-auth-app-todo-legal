@@ -2,10 +2,42 @@
 import HeaderComponent from "../components/Header.vue";
 import FooterComponent from "../components/Footer.vue";
 import MainContent from "../components/MainContent.vue";
+import { ref } from "vue";
+import useAuthLogin from "../composables/useAuthLogin";
+import { hideLoading, showAlert } from "../utils";
+import { useRouter } from "vue-router";
 
 export default {
   name: "LoginView",
   components: { MainContent, FooterComponent, HeaderComponent },
+  setup() {
+    const { loginUser } = useAuthLogin();
+    const router = useRouter();
+
+    const loginForm = ref({
+      username: "1758711124-2",
+      password: "TTes5t20s51**",
+    });
+
+    const onLoginSubmit = async () => {
+      const { ok } = await loginUser(loginForm.value);
+      if (ok) {
+        hideLoading();
+        await router.push({ name: "home" });
+      } else {
+        await showAlert(
+          "Error",
+          "La cédula ingresada no esta registrada en el sistema.",
+          "error"
+        );
+      }
+    };
+
+    return {
+      loginForm,
+      onLoginSubmit,
+    };
+  },
 };
 </script>
 
@@ -22,24 +54,26 @@ export default {
         </p>
       </div>
       <div class="wrapper-content">
-        <form method="post">
+        <form>
           <div class="txt_field">
-            <input required type="text" />
+            <input v-model="loginForm.username" required type="text" />
             <span></span>
             <label>Cédula de Identidad</label>
           </div>
           <div class="txt_field">
-            <input required type="password" />
+            <input v-model="loginForm.password" required type="password" />
             <span></span>
             <label>Contraseña</label>
           </div>
         </form>
         <div class="create-account">
-          <a href="#">No tengo cuenta, crear una <span>gratis</span> </a>
+          <router-link :to="{ name: 'register' }">
+            No tengo cuenta, crear una <span>gratis</span>
+          </router-link>
         </div>
       </div>
       <div class="wrapper-footer">
-        <button class="btn-submit" type="button">
+        <button class="btn-submit" type="button" @click.prevent="onLoginSubmit">
           Continuar
           <i class="far fa-arrow-alt-circle-right"></i>
         </button>
@@ -49,4 +83,4 @@ export default {
   <FooterComponent msg="Smart Contracts by" />
 </template>
 
-<style scoped src="../assets/css/auth-shared.css"></style>
+<style scoped src="../../../assets/css/auth-shared.css"></style>

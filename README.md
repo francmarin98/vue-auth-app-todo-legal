@@ -6,15 +6,15 @@ This template should help get you started developing with Vue 3 in Vite.
 
 - Login Screen
 
-![img.png](src/screenshots/login-screen.png)
+![img.png](src/modules/auth/screenshots/login-screen.png)
 
 - Register Screen
 
-![img.png](src/screenshots/register-screen.png)
+![img.png](src/modules/auth/screenshots/register-screen.png)
 
 - Home Screen
 
-![img_1.png](src/screenshots/home-screen.png)
+![img_1.png](src/modules/auth/screenshots/home-screen.png)
 
 ## Recommended IDE Setup
 
